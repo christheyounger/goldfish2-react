@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import TasksListTask from './TasksListTask';
 
 export default class TasksList extends Component {
     constructor(props) {
         super(props);
-        this.state = {tasks: [{id: 1, title: 'cheese', done: true}]};
+        this.state = {tasks: []};
     }
     componentDidMount() {
         fetch('http://localhost:8000/api/tasks')
@@ -14,9 +15,7 @@ export default class TasksList extends Component {
         return (
             <ol>
                 {this.state.tasks.map(task => (
-                    <li key={task.id}>
-                        {task.title}
-                    </li>
+                    <TasksListTask key={task.id} task={task} />
                 ))}
             </ol>
         )
