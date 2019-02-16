@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './goldfish.svg';
 import './App.css';
+import TasksList from './component/TasksList';
 
 class App extends Component {
   render() {
@@ -10,6 +11,7 @@ class App extends Component {
           Goldfish
           <img src={logo} className="App-logo" alt="logo" />
         </header>
+        <TasksList/>
       </div>
     );
   }
