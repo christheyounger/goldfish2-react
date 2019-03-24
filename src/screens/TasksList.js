@@ -1,36 +1,29 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import TasksListTask from '../component/TasksListTask';
 
-export default class TasksList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {tasks: []};
-    }
-    componentDidMount() {
-        fetch('http://localhost:8000/api/tasks')
+export default function TasksList(props) {
+
+    const [tasks, setTasks] = useState([]);
+    useEffect(() => {
+        if (!tasks.length) fetch('http://localhost:8000/api/tasks')
         .then(response => response.json())
-        .then(tasks => this.setState({tasks}))
+        .then(setTasks)
+    })
+
+    function addTask() {
+        setTasks(tasks.concat({}));
     }
 
-    addTask = () => {
-        const { tasks } = this.state;
-        tasks.push({});
-        this.setState({ tasks });
-    }
-
-    render() {
-        const { addTask } = this;
-        return (
-            <div>
-                <ol>
-                    {this.state.tasks.map(task => (
-                        <TasksListTask key={task.id} task={task} />
-                    ))}
-                </ol>
-                <button onClick={addTask}>
-                    Hello
-                </button>
-            </div>
-        )
-    }
+    return (
+        <div>
+            <ol>
+                {tasks.map(task => (
+                    <TasksListTask key={task.id} task={task} />
+                ))}
+            </ol>
+            <button onClick={() => {addTask()}}>
+                Hello
+            </button>
+        </div>
+    )
 }
