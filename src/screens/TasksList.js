@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import TasksListTask from './TasksListTask';
+import TasksListTask from '../component/TasksListTask';
 
 export default class TasksList extends Component {
     constructor(props) {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './goldfish.svg';
 import './App.css';
-import TasksList from './component/TasksList';
+import TasksList from './screens/TasksList';
 
 class App extends Component {
   render() {
