@@ -11,13 +11,26 @@ export default class TasksList extends Component {
         .then(response => response.json())
         .then(tasks => this.setState({tasks}))
     }
+
+    addTask = () => {
+        const { tasks } = this.state;
+        tasks.push({});
+        this.setState({ tasks });
+    }
+
     render() {
+        const { addTask } = this;
         return (
-            <ol>
-                {this.state.tasks.map(task => (
-                    <TasksListTask key={task.id} task={task} />
-                ))}
-            </ol>
+            <div>
+                <ol>
+                    {this.state.tasks.map(task => (
+                        <TasksListTask key={task.id} task={task} />
+                    ))}
+                </ol>
+                <button onClick={addTask}>
+                    Hello
+                </button>
+            </div>
         )
     }
 }
