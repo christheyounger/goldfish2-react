@@ -1,23 +1,17 @@
 import React, { useEffect, useState } from "react";
 import TasksListTask from "../component/TasksListTask";
 import TaskNew from "../component/TaskNew";
+import { get, saveNew } from "../services/Tasks";
 
 export default function TasksList(props) {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState(null);
   useEffect(() => {
-    if (!tasks.length)
-      fetch("http://localhost:8000/api/tasks")
-        .then(response => response.json())
-        .then(setTasks);
+    if (!tasks.length) get().then(setTasks);
   });
 
   async function addTask(task) {
-    await fetch("http://localhost:8000/api/tasks", {
-      body: JSON.stringify(task),
-      method: "POST",
-      headers: { "Content-Type": "application/json" }
-    });
+    await saveNew(task);
     setTasks(tasks.concat(task));
   }
 

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { save } from "../services/Tasks";
 
 export default class TasksListTask extends Component {
   constructor(props) {
@@ -6,26 +7,23 @@ export default class TasksListTask extends Component {
     this.state = this.props.task;
     this.completeTask = this.completeTask.bind(this);
   }
-  completeTask(event) {
+  async completeTask(event) {
     const completed = event.target.checked;
-    return fetch(`http://localhost:8000/api/tasks/${this.props.task.id}`, {
-      method: "PATCH",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ action: completed ? "complete" : "uncomplete" })
-    }).then(response => {
-      if (response.ok) this.setState({ completed });
-    });
+    const { task } = this.props;
+    await save(task.id, { action: completed ? "complete" : "uncomplete" });
+    this.setState({ completed });
   }
   render() {
+    const { task, title, completed } = this.state;
     return (
       <li>
         <input
           type="checkbox"
-          value={this.state.task}
-          checked={this.state.completed}
+          value={task}
+          checked={completed}
           onChange={this.completeTask}
         />
-        {this.state.title}
+        {title}
       </li>
     );
   }
