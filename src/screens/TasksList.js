@@ -25,7 +25,7 @@ export default function TasksList(props) {
   return (
     <div>
       <h2>Today's Tasks:</h2>
-      <table class="table">
+      <table className="table">
         <thead>
           <tr>
             <th />
