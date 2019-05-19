@@ -24,7 +24,6 @@
     "not op_mini all"
   ],
   "jest": {
-    "collectCoverage": true,
     "coverageReporters": [
       "clover"
     ]
