@@ -14,17 +14,20 @@ export default class TasksListTask extends Component {
     this.setState({ completed });
   }
   render() {
-    const { task, title, completed } = this.state;
+    const { task, title, completed, due } = this.state;
     return (
-      <li>
-        <input
-          type="checkbox"
-          value={task}
-          checked={completed}
-          onChange={this.completeTask}
-        />
-        {title}
-      </li>
+      <tr>
+        <td>
+          <input
+            type="checkbox"
+            value={task}
+            checked={completed}
+            onChange={this.completeTask}
+          />
+        </td>
+        <td>{title}</td>
+        <td>{due}</td>
+      </tr>
     );
   }
 }

@@ -17,11 +17,21 @@ export default function TasksList(props) {
 
   return (
     <div>
-      <ol>
-        {tasks.map(task => (
-          <TasksListTask key={task.id} task={task} />
-        ))}
-      </ol>
+      <h2>Today's Tasks:</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th />
+            <th>Task</th>
+            <th>Due</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tasks.map(task => (
+            <TasksListTask key={task.id} task={task} />
+          ))}
+        </tbody>
+      </table>
       <button
         onClick={() => {
           setNewTask({});
