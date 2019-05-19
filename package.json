@@ -35,7 +35,8 @@
     "codecov": "^3.2.0",
     "husky": "^2.3.0",
     "lint-staged": "^8.1.7",
-    "prettier": "^1.17.1"
+    "prettier": "^1.17.1",
+    "react-test-renderer": "^16.8.6"
   },
   "husky": {
     "hooks": {
