@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TasksListTask from "../component/TasksListTask";
 import TaskNew from "../component/TaskNew";
-import { get, saveNew } from "../services/Tasks";
+import { get, saveNew, save } from "../services/Tasks";
 
 export default function TasksList(props) {
   const [tasks, setTasks] = useState([]);
@@ -13,6 +13,13 @@ export default function TasksList(props) {
   async function addTask(task) {
     await saveNew(task);
     setTasks(tasks.concat(task));
+  }
+
+  async function completeTask(id, completed) {
+    const task = tasks.find(task => task.id === id);
+    await save(id, { action: completed ? "complete" : "uncomplete" });
+    task.completed = completed;
+    setTasks([...tasks.filter(task => task.id !== id), task]);
   }
 
   return (
@@ -28,7 +35,11 @@ export default function TasksList(props) {
         </thead>
         <tbody>
           {tasks.map(task => (
-            <TasksListTask key={task.id} task={task} />
+            <TasksListTask
+              key={task.id}
+              completeTask={completed => completeTask(task.id, completed)}
+              {...task}
+            />
           ))}
         </tbody>
       </table>
