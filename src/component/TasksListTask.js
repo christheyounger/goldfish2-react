@@ -1,7 +1,8 @@
 import React from "react";
+import EditableText from "./EditableText";
 
 const TaskListTask = props => {
-  const { key, title, due, completed, completeTask } = props;
+  const { key, title, due, completed, update, completeTask } = props;
   return (
     <tr>
       <td>
@@ -12,7 +13,9 @@ const TaskListTask = props => {
           onChange={() => completeTask(!completed)}
         />
       </td>
-      <td>{title}</td>
+      <td>
+        <EditableText key="title" value={title} update={update} />
+      </td>
       <td>{due}</td>
     </tr>
   );

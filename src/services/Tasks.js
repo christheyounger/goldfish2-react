@@ -20,6 +20,8 @@ const get = path => request((path = ""), {}).then(response => response.json());
 
 const post = (path, body) => request(path, addBody({ method: "POST" }, body));
 
+const put = (path, body) => request(path, addBody({ method: "PUT" }, body));
+
 const saveNew = body =>
   post("", body).then(request => {
     console.log(request);
@@ -27,6 +29,8 @@ const saveNew = body =>
 
 const patch = (path, body) => request(path, addBody({ method: "PATCH" }, body));
 
-const save = (id, body) => patch(`/${id}`, body);
+const modify = (id, body) => patch(`/${id}`, body);
 
-export { get, saveNew, save };
+const save = body => put("", body);
+
+export { get, saveNew, modify, save };
